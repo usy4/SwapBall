@@ -21,10 +21,10 @@ class Main extends PluginBase implements Listener{
     
     }
 
-	public function addWands(Player $player){
-		$item = VanillaItems::SNOWBALL();
+	public function addSwapBall(Player $player, $amount){
+		$item = VanillaItems::SNOWBALL()->setCount($amount);
 		$item->setCustomName("§r§cSwap§cBall\n§7Shoot a player");
-		$player->getInventory()->addItem($item1);
+		$player->getInventory()->addItem($item);
                 $player->sendMessage("Done.");
 	}
 
