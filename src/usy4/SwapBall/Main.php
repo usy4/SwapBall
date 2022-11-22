@@ -34,7 +34,7 @@ class Main extends PluginBase implements Listener{
 		if($entity instanceof Player){
 			if($event instanceof EntityDamageByEntityEvent && ($damager = $event->getDamager()) instanceof Player){
 				$item = $damager->getInventory()->getItemInHand()->getName();
-				if($item == "§r§cSwap§cBall\n§7Shoot a player"p){
+				if($item == "§r§cSwap§cBall\n§7Shoot a player"){
 					$event->cancel();
 					$this->onHit($damager, $entity);
 				}	
