@@ -53,7 +53,7 @@ class Main extends PluginBase implements Listener{
                 $el = $targetPlayer->getLocation();
                 $subject->teleport($el);
                 $targetPlayer->teleport($dl);
-                $subject->sendMessage("§bYou swapped with §r'.$targetPlayer->getName());
+                $subject->sendMessage('§bYou swapped with §r'.$targetPlayer->getName());
 	   	$targetPlayer->sendMessage('§bYou swapped with §r'.$subject->getName());
 	}
 
