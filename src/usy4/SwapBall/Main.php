@@ -23,18 +23,22 @@ class Main extends PluginBase implements Listener{
 
 	public function addSwapBall(Player $player, $amount){
 		$item = VanillaItems::SNOWBALL()->setCount($amount);
-		$item->setCustomName("§r§cSwap§cBall\n§7Shoot a player");
+		$item->setCustomName("§r§cSwap§bBall\n§7Shoot a player");
 		$player->getInventory()->addItem($item);
                 $player->sendMessage("Done.");
 	}
 
+           /**
+        * @ignoreCancelled true
+        * @priority MONITOR
+           */
     
 	public function onDamage(EntityDamageEvent $event): void{
 		$entity = $event->getEntity();
 		if($entity instanceof Player){
 			if($event instanceof EntityDamageByEntityEvent && ($damager = $event->getDamager()) instanceof Player){
 				$item = $damager->getInventory()->getItemInHand()->getName();
-				if($item == "§r§cSwap§cBall\n§7Shoot a player"){
+				if($item == "§r§cSwap§bBall\n§7Shoot a player"){
 					$event->cancel();
 					$this->onHit($damager, $entity);
 				}	
