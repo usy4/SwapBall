@@ -1,0 +1,10 @@
+name: SwapBall
+author: usy4
+api: [4.0.0]
+version: 1.0.0
+main: usy4\SwapBall\Main
+descriptions: swap locations between players
+
+permissions:
+  swapball.command:
+    default: op
