@@ -17,7 +17,7 @@ class Main extends PluginBase implements Listener{
 	public function onEnable() : void{
 
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
-		$this->getServer()->getCommandMap()->register($this->getName(), new SitWandsCommand($this));        
+		$this->getServer()->getCommandMap()->register($this->getName(), new SwapBallCommand($this));        
     
     }
 
