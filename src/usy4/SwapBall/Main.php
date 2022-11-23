@@ -38,8 +38,8 @@ class Main extends PluginBase implements Listener{
 	$item = VanillaItems::SNOWBALL()->setCount($amount);
 	$item->setCustomName("§r§cSwap§bBall\n§7Shoot a player");
 	$player->getInventory()->addItem($item);
-        $player->sendMessage("Done.");
-	}
+        $player->sendMessage("Done.");	
+    }
     
     public function onLaunch(ProjectileLaunchEvent $event){  
         $entity = $event->getEntity();
