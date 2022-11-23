@@ -46,11 +46,8 @@ class Main extends PluginBase implements Listener{
 	}
     
     public function onLaunch(ProjectileLaunchEvent $event){  
-
         $entity = $event->getEntity();
-
         $player = $entity->getOwningEntity();
-
         if($player->getInventory()->getItemInHand()->getName() == "§r§cSwap§bBall\n§7Shoot a player"){     
             $entity->setNameTag("SwapBall");  
         }
