@@ -14,39 +14,36 @@ use pocketmine\event\entity\EntityDamageByChildEntityEvent;
 use pocketmine\event\entity\ProjectileLaunchEvent;
 use pocketmine\event\entity\ProjectileHitEntityEvent;
 use pocketmine\event\entity\ProjectileHitEvent;
+use pocketmine\event\player\PlayerItemUseEvent;
 
 class Main extends PluginBase implements Listener{
 
-	public function onEnable() : void{
-
-		$this->getServer()->getPluginManager()->registerEvents($this, $this);
-		$this->getServer()->getCommandMap()->register($this->getName(), new SwapBallCommand($this));        
-    $this->SwapBallClose();
+    public function onEnable() : void{
+	$this->getServer()->getPluginManager()->registerEvents($this, $this);
+	$this->getServer()->getCommandMap()->register($this->getName(), new SwapBallCommand($this));        
+        $this->SwapBallClose();
     }
     
     public function SwapBallClose(){
         foreach($this->getServer()->getWorldManager()->getWorlds() as $world){
-            foreach ($world->getEntities() as $entity) {
-                if ($entity instanceof Snowball) {
+            foreach($world->getEntities() as $entity) {
+                if($entity instanceof Snowball) {
                     $entity->close();
                 }
             }
         }
     }
 
-	public function addSwapBall(Player $player, $amount){
-		$item = VanillaItems::SNOWBALL()->setCount($amount);
-		$item->setCustomName("§r§cSwap§bBall\n§7Shoot a player");
-		$player->getInventory()->addItem($item);
-                $player->sendMessage("Done.");
+    public function addSwapBall(Player $player, $amount){
+	$item = VanillaItems::SNOWBALL()->setCount($amount);
+	$item->setCustomName("§r§cSwap§bBall\n§7Shoot a player");
+	$player->getInventory()->addItem($item);
+        $player->sendMessage("Done.");
 	}
     
     public function onLaunch(ProjectileLaunchEvent $event){  
-
         $entity = $event->getEntity();
-
         $player = $entity->getOwningEntity();
-
         if($player->getInventory()->getItemInHand()->getName() == "§r§cSwap§bBall\n§7Shoot a player"){     
             $entity->setNameTag("SwapBall");  
         }
@@ -68,15 +65,15 @@ class Main extends PluginBase implements Listener{
         }
     }
     
-	public function Hit(Player $subject, Player $targetPlayer) {
-		if($subject->getName() === $targetPlayer->getName()) 
-			return;			
-   		$dl = $subject->getLocation();
+    public function Hit(Player $subject, Player $targetPlayer) {
+	if($subject->getName() === $targetPlayer->getName()) 
+		return;			
+   	$dl = $subject->getLocation();
         $el = $targetPlayer->getLocation();
         $subject->teleport($el);
-                $targetPlayer->teleport($dl);
+        $targetPlayer->teleport($dl);
         $subject->sendMessage('§bYou swapped with §r'.$targetPlayer->getName());
-	   	$targetPlayer->sendMessage('§bYou swapped with §r'.$subject->getName());
+	$targetPlayer->sendMessage('§bYou swapped with §r'.$subject->getName());
     }
     
     public function onChild(EntityDamageByChildEntityEvent $event){
