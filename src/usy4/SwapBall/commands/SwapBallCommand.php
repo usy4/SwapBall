@@ -55,8 +55,8 @@ class SwapBallCommand extends Command implements PluginOwned
                   return;
                 }
 
-                if($args[0] > 60){
-                  $sender->sendMessage("The amount limit is 60.");
+                if($args[0] > 16){
+                  $sender->sendMessage("The amount limit is 16.");
                   return;
                 }
    
