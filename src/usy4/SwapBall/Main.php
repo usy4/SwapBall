@@ -8,16 +8,13 @@ use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\item\VanillaItems;
 use pocketmine\event\Listener;
-use pocketmine\entity\projectile\Snowball;
-use pocketmine\event\entity\EntityDamageByEntityEvent;
-use pocketmine\event\entity\EntityDamageEvent;
-use pocketmine\event\entity\ProjectileLaunchEvent;
 
+use pocketmine\entity\projectile\Snowball;
+use pocketmine\event\entity\EntityDamageByChildEntityEvent;
+use pocketmine\event\entity\ProjectileLaunchEvent;
 use pocketmine\event\entity\ProjectileHitEntityEvent;
 use pocketmine\event\entity\ProjectileHitEvent;
-
 use pocketmine\event\player\PlayerItemUseEvent;
-use pocketmine\event\EventPriority;
 
 class Main extends PluginBase implements Listener{
 
@@ -46,8 +43,11 @@ class Main extends PluginBase implements Listener{
 	}
     
     public function onLaunch(ProjectileLaunchEvent $event){  
+
         $entity = $event->getEntity();
+
         $player = $entity->getOwningEntity();
+
         if($player->getInventory()->getItemInHand()->getName() == "§r§cSwap§bBall\n§7Shoot a player"){     
             $entity->setNameTag("SwapBall");  
         }
@@ -65,7 +65,6 @@ class Main extends PluginBase implements Listener{
         if($event instanceof ProjectileHitEntityEvent && ($target = $event->getEntityHit()) instanceof Player){         
             if($et == "SwapBall"){
                 $this->Hit($owner, $target);
-                $event->cancel();
             }		
         }
     }
@@ -80,5 +79,11 @@ class Main extends PluginBase implements Listener{
         $subject->sendMessage('§bYou swapped with §r'.$targetPlayer->getName());
 	   	$targetPlayer->sendMessage('§bYou swapped with §r'.$subject->getName());
     }
-     
+    
+    public function onChild(EntityDamageByChildEntityEvent $event){
+        if($event->getChild()->getNameTag() == "SwapBall"){
+            $event->cancel();
+        }
+    }
+        
 }
