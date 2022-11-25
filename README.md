@@ -1,5 +1,5 @@
 # SwapBall
-Swap locations between players 
+When you throw the swapball on someone, your locations swap
 # command
 Usage: `/swapball (amount)`
 # permissions
