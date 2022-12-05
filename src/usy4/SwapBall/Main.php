@@ -21,19 +21,8 @@ class Main extends PluginBase implements Listener{
     public function onEnable() : void{
 	$this->getServer()->getPluginManager()->registerEvents($this, $this);
 	$this->getServer()->getCommandMap()->register($this->getName(), new SwapBallCommand($this));        
-        $this->SwapBallDespawn();
     }
-    
-    public function SwapBallDespawn(){
-        foreach($this->getServer()->getWorldManager()->getWorlds() as $world){
-            foreach($world->getEntities() as $entity) {
-                if($entity instanceof Snowball) {
-                    $entity->flagForDespawn();
-                }
-            }
-        }
-    }
-
+	
     public function addSwapBall(Player $player, $amount){
 	$item = VanillaItems::SNOWBALL()->setCount($amount);
 	$item->setCustomName("§r§cSwap§bBall\n§7Shoot a player");
@@ -44,6 +33,7 @@ class Main extends PluginBase implements Listener{
     public function onLaunch(ProjectileLaunchEvent $event){  
         $entity = $event->getEntity();
         $player = $entity->getOwningEntity();
+        if($player === null) return;
 	if($player instanceof Player){
 	    if($player->getInventory()->getItemInHand()->getName() == "§r§cSwap§bBall\n§7Shoot a player"){
 		$entity->setNameTag("SwapBall");  
