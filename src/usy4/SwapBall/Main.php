@@ -35,7 +35,7 @@ class Main extends PluginBase implements Listener{
 	public function onLaunch(ProjectileLaunchEvent $event){  
 		$entity = $event->getEntity();
 		$owner = $entity->getOwningEntity();
-		if($owner !== null) {
+		if(!is_Null($owner)){
 			if($owner instanceof Player){
 				if($owner->getInventory()->getItemInHand()->getName() == "§r§cSwap§bBall\n§7Shoot a player"){
 					$entity->setNameTag("SwapBall");  
@@ -52,7 +52,7 @@ class Main extends PluginBase implements Listener{
 	public function onHit(ProjectileHitEvent $event) : void{
 		$entity = $event->getEntity();
 		$owner = $entity->getOwningEntity();
-		if($owner !== null){
+		if(!is_Null($owner)){
 			if($owner instanceof Player){
 				$et = $entity->getNameTag();	 
 				if($event instanceof ProjectileHitEntityEvent && ($target = $event->getEntityHit()) instanceof Player){         
