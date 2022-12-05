@@ -52,16 +52,18 @@ class Main extends PluginBase implements Listener{
 	public function onHit(ProjectileHitEvent $event) : void{
 		$entity = $event->getEntity();
 		$owner = $entity->getOwningEntity();
-		if($owner === null) {
-			$et = $entity->getNameTag();	 
-			if($event instanceof ProjectileHitEntityEvent && ($target = $event->getEntityHit()) instanceof Player){         
-				if($et == "SwapBall"){
-					$this->Hit($owner, $target);
-				}		
+		if($owner !== null) {	
+			if($owner instanceof Player){
+				$et = $entity->getNameTag();	 
+				if($event instanceof ProjectileHitEntityEvent && ($target = $event->getEntityHit()) instanceof Player){         
+					if($et == "SwapBall"){
+						$this->Hit($owner, $target);
+					}		
+				}
 			}
 		}
 	}
-    
+	
 	public function Hit(Player $subject, Player $targetPlayer) {
 		if($subject->getName() === $targetPlayer->getName()) 
 			return;			
