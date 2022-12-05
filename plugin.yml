@@ -3,7 +3,7 @@ author: usy4
 api: [4.0.0]
 version: 1.0.0
 main: usy4\SwapBall\Main
-descriptions: swap locations between players
+descriptions: When you throw the swapball on someone, your locations swap.
 
 permissions:
   swapball.command:
