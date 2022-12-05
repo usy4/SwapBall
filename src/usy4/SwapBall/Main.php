@@ -21,14 +21,14 @@ class Main extends PluginBase implements Listener{
     public function onEnable() : void{
 	$this->getServer()->getPluginManager()->registerEvents($this, $this);
 	$this->getServer()->getCommandMap()->register($this->getName(), new SwapBallCommand($this));        
-        $this->SwapBallClose();
+        $this->SwapBallDespawn();
     }
     
-    public function SwapBallClose(){
+    public function SwapBallDespawn(){
         foreach($this->getServer()->getWorldManager()->getWorlds() as $world){
             foreach($world->getEntities() as $entity) {
                 if($entity instanceof Snowball) {
-                    $entity->close();
+                    $entity->flagForDespawn();
                 }
             }
         }
