@@ -1,5 +1,6 @@
 # SwapBall
-When you throw the swapball on someone, your locations swap
+When you throw the swapball on someone, your locations swap.
+**Note:** The SwapBall works in all worlds.
 # command
 Usage: `/swapball (amount)`
 # permissions
